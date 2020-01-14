@@ -86,13 +86,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="数据结构排序重点考察-&amp;gt;概念重要、选填很多来自课后习题、时间复杂度要求绪论 基本概念 时间复杂度-&amp;gt;最差复杂度、平均复杂度  线性表 单链表 链表交换 合并  栈和队列 栈特点  顺序栈、链栈  队列——rear front 定义 实现  f指向当前队列头元素的前一位置 r为队尾元素的位置  非循环队列：r-f就是队列长度  循环队列：r-f可能为负，因此要加上队列大小再对队列大小求余">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2020/01/14/数据结构/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Image.png">
-<meta property="og:image" content="http://yoursite.com/2020/01/14/数据结构/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Image1.png">
-<meta property="og:updated_time" content="2020-01-14T14:31:18.326Z">
+<meta property="og:image" content="http://yoursite.com/2020/01/14/数据结构/Image.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/14/数据结构/Image1.png">
+<meta property="og:updated_time" content="2020-01-14T14:53:30.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构">
 <meta name="twitter:description" content="数据结构排序重点考察-&amp;gt;概念重要、选填很多来自课后习题、时间复杂度要求绪论 基本概念 时间复杂度-&amp;gt;最差复杂度、平均复杂度  线性表 单链表 链表交换 合并  栈和队列 栈特点  顺序栈、链栈  队列——rear front 定义 实现  f指向当前队列头元素的前一位置 r为队尾元素的位置  非循环队列：r-f就是队列长度  循环队列：r-f可能为负，因此要加上队列大小再对队列大小求余">
-<meta name="twitter:image" content="http://yoursite.com/2020/01/14/数据结构/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Image.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/14/数据结构/Image.png">
 
 
 
@@ -391,7 +391,9 @@
 </li>
 <li><p>树转二叉树：兄弟之间横连起来，后面的当前面的右子。根的第一个孩子是左子。唯一只有一个孩子也放左子</p>
 </li>
-<li><p>二叉树转森林：根连着自己的左子树成一颗 而每一个右子树自成一颗（割断）拆下来的树的右子想成siblings，对应建成一颗树<br><img src="%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Image.png" alt>* 建线索树时，要看它的指针有没有被左右子树用。如果用了，就不要在上面画线索了</p>
+<li><p>二叉树转森林：根连着自己的左子树成一颗 而每一个右子树自成一颗（割断）拆下来的树的右子想成siblings，对应建成一颗树<br><img src="Image.png" alt></p>
+</li>
+<li><p>建线索树时，要看它的指针有没有被左右子树用。如果用了，就不要在上面画线索了</p>
 </li>
 <li><p>由某两个序求另一个序</p>
 </li>
@@ -782,8 +784,10 @@
 </ul>
 </li>
 </ul>
-<p><img src="%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Image1.png" alt>* 归并时并不在意内存</p>
+<p><img src="Image1.png" alt></p>
 <ul>
+<li><p>归并时并不在意内存</p>
+</li>
 <li><p>多路平衡归并的实现</p>
 </li>
 <li><p>置换选择排序：增加初始归并段的大小</p>
