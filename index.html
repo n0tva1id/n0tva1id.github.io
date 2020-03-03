@@ -69,18 +69,67 @@
   
   <article class="post">
     <div class="post-title">
-      <a class="post-title-link" href="/2020/03/02/OpenWrt/">OpenWrt</a>
+      <a class="post-title-link" href="/2020/03/02/OpenWrt/">LEAN OpenWrt/LEDE的编译与安装（ESXi 6.7环境）</a>
     </div>
     <div class="post-content">
       
-      <h1 id="LEAN-OpenWrt"><a href="#LEAN-OpenWrt" class="headerlink" title="LEAN OpenWrt"></a>LEAN OpenWrt</h1><h2 id="在root下编译"><a href="#在root下编译" class="headerlink" title="在root下编译"></a>在root下编译</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make FORCE_UNSAFE_CONFIGURE=1 -j1 V=s</span><br></pre></td></tr></table></figure>
+      <h2 id="在root下编译（需64位系统，LEAN推荐使用Ubuntu）"><a href="#在root下编译（需64位系统，LEAN推荐使用Ubuntu）" class="headerlink" title="在root下编译（需64位系统，LEAN推荐使用Ubuntu）"></a>在root下编译（需64位系统，LEAN推荐使用Ubuntu）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib linux-libc-dev:i386</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone [https://github.com/coolsnowwolf/lede](https://github.com/coolsnowwolf/lede)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds update -a </span><br><span class="line">./scripts/feeds install -a</span><br><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make FORCE_UNSAFE_CONFIGURE=1 -j1 V=s</span><br></pre></td></tr></table></figure>
 
 <h2 id="编译选项"><a href="#编译选项" class="headerlink" title="编译选项"></a>编译选项</h2><p>-j1为单线程编译</p>
 <p>-jN为N线程编译</p>
-<p>首次编译使用多线程将有可能失败？</p>
-<h2 id="默认设置"><a href="#默认设置" class="headerlink" title="默认设置"></a>默认设置</h2><p>Management Address：192.168.1.1</p>
-<p>root</p>
+<p>首次编译使用多线程将有可能失败，LEAN推荐二次编译之后再使用多线程</p>
+<p><strong>注：先确认curl是否安装，无curl时会使用wget，容易失败；若在虚拟机中编译，虚拟机内存必须超过1G，否则编译Go时会因内存不足失败。为了让编译时能放心不值守，建议先确认是否符合以上条件</strong></p>
+<p>性能参考：</p>
+<p>MacBook Pro 2018 13’’（i5-8259u，使用PD虚拟Ubuntu 18.04进行编译，单线程、首次编译纯耗时约1.5h）</p>
+<h2 id="默认设置"><a href="#默认设置" class="headerlink" title="默认设置"></a>默认设置</h2><p>root</p>
 <p>password</p>
+<h1 id="安装至ESXi-6-7"><a href="#安装至ESXi-6-7" class="headerlink" title="安装至ESXi 6.7"></a>安装至ESXi 6.7</h1><h2 id="转换、上传vmdk"><a href="#转换、上传vmdk" class="headerlink" title="转换、上传vmdk"></a>转换、上传vmdk</h2><p>编译后进入** lede/bin/targets/x86/64**</p>
+<p>选取 <strong>openwrt-x86-64-combined-squashfs.img</strong></p>
+<p>使用StarWind Converter 转换为ESX Server类文件</p>
+<p>注意：转换后将产生两个VMDK文件。要将二者都上传至数据卷中，ESXi将只显示一个</p>
+<h3 id="或（未尝试）"><a href="#或（未尝试）" class="headerlink" title="或（未尝试）"></a>或（未尝试）</h3><p>上传 *<em>openwrt-x86-64-combined-squashfs.img *</em>至数据卷</p>
+<p>在控制面板中打开ESXi Shell与SSH：主机-操作-服务-打开SSH与Shell</p>
+<p>进入esxi的数据卷目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /vmfs/volumes/datastore1</span><br></pre></td></tr></table></figure>
+
+<p>使用转换命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmkfstools -i openwrt-x86-64-combined-squashfs.vmdk LeanOpenWrt_x64.vmdk -d thin</span><br></pre></td></tr></table></figure>
+
+<h2 id="新建虚拟机"><a href="#新建虚拟机" class="headerlink" title="新建虚拟机"></a>新建虚拟机</h2><h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><ul>
+<li>本机为3205U，选择分配1G内存、1个核心</li>
+<li>可以只保留基本的VM网络，也可以先添加好直通网口</li>
+<li><strong>重要：由于默认编译未选择UEFI-gpt，固件无UEFI引导，必须在虚拟机选项中将引导改为BIOS，否则无法正常引导</strong></li>
+</ul>
+<p>**    **之后选择原先上传的vmdk文件作为磁盘，选项默认，启动虚拟机后将自动进行初始化安装</p>
+<h2 id="配置LEDE"><a href="#配置LEDE" class="headerlink" title="配置LEDE"></a>配置LEDE</h2><p>虚拟显示Log停止滚动后，随意键入字符并回车，即可进入LEDE的命令行</p>
+<p>先修改基本的LAN配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/config/network</span><br></pre></td></tr></table></figure>
+
+<p>此时可以修改LAN口地址、选取网络适配器</p>
+<p>修改完成后，进入LEDE后台登陆进行进一步的配置</p>
+<h2 id="开启FTP服务"><a href="#开启FTP服务" class="headerlink" title="开启FTP服务"></a>开启FTP服务</h2><p>安装vsftpd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install vsftpd</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
+
+<p>加入</p>
+<blockquote>
+<p>secure_chroot_dir=/root  </p>
+</blockquote>
+<blockquote>
+<p> ftp_username=root</p>
+</blockquote>
+<p><strong>Tips：</strong></p>
+<p>实际在系统中，直通ethx与网口x+1对应是紊乱的，需要手动尝试，暂未找到解决办法。目前怀疑是虚拟机启动之后才添加直通网卡的问题。</p>
 
       
     </div>
