@@ -88,11 +88,11 @@
 <p>MacBook Pro 2018 13’’（i5-8259u，使用PD虚拟Ubuntu 18.04进行编译，单线程、首次编译纯耗时约1.5h）</p>
 <h2 id="默认设置"><a href="#默认设置" class="headerlink" title="默认设置"></a>默认设置</h2><p>root</p>
 <p>password</p>
-<h1 id="安装至ESXi-6-7"><a href="#安装至ESXi-6-7" class="headerlink" title="安装至ESXi 6.7"></a>安装至ESXi 6.7</h1><h2 id="转换、上传vmdk"><a href="#转换、上传vmdk" class="headerlink" title="转换、上传vmdk"></a>转换、上传vmdk</h2><p>编译后进入** lede/bin/targets/x86/64**</p>
+<h1 id="安装至ESXi-6-7"><a href="#安装至ESXi-6-7" class="headerlink" title="安装至ESXi 6.7"></a>安装至ESXi 6.7</h1><h2 id="转换、上传vmdk"><a href="#转换、上传vmdk" class="headerlink" title="转换、上传vmdk"></a>转换、上传vmdk</h2><p>编译后进入<strong>lede/bin/targets/x86/64</strong></p>
 <p>选取 <strong>openwrt-x86-64-combined-squashfs.img</strong></p>
 <p>使用StarWind Converter 转换为ESX Server类文件</p>
 <p>注意：转换后将产生两个VMDK文件。要将二者都上传至数据卷中，ESXi将只显示一个</p>
-<h3 id="或（未尝试）"><a href="#或（未尝试）" class="headerlink" title="或（未尝试）"></a>或（未尝试）</h3><p>上传 *<em>openwrt-x86-64-combined-squashfs.img *</em>至数据卷</p>
+<h3 id="或（未尝试）"><a href="#或（未尝试）" class="headerlink" title="或（未尝试）"></a>或（未尝试）</h3><p>上传 <strong>openwrt-x86-64-combined-squashfs.img</strong>至数据卷</p>
 <p>在控制面板中打开ESXi Shell与SSH：主机-操作-服务-打开SSH与Shell</p>
 <p>进入esxi的数据卷目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /vmfs/volumes/datastore1</span><br></pre></td></tr></table></figure>
@@ -103,9 +103,8 @@
 <h2 id="新建虚拟机"><a href="#新建虚拟机" class="headerlink" title="新建虚拟机"></a>新建虚拟机</h2><h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><ul>
 <li>本机为3205U，选择分配1G内存、1个核心</li>
 <li>可以只保留基本的VM网络，也可以先添加好直通网口</li>
-<li><strong>重要：由于默认编译未选择UEFI-gpt，固件无UEFI引导，必须在虚拟机选项中将引导改为BIOS，否则无法正常引导</strong></li>
+<li><strong>重要：由于默认编译未选择UEFI-gpt，固件无UEFI引导，必须在虚拟机选项中将引导改为BIOS，否则无法正常引导</strong><br>之后选择原先上传的vmdk文件作为磁盘，选项默认，启动虚拟机后将自动进行初始化安装</li>
 </ul>
-<p>**    **之后选择原先上传的vmdk文件作为磁盘，选项默认，启动虚拟机后将自动进行初始化安装</p>
 <h2 id="配置LEDE"><a href="#配置LEDE" class="headerlink" title="配置LEDE"></a>配置LEDE</h2><p>虚拟显示Log停止滚动后，随意键入字符并回车，即可进入LEDE的命令行</p>
 <p>先修改基本的LAN配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/config/network</span><br></pre></td></tr></table></figure>
