@@ -10,6 +10,8 @@
     <meta name="title" content="n0tva1id">
     <meta name="description" content>
     <meta property="og:image" content="/favicon.png">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
     <link rel="shortcut icon" href="/favicon.png">
     
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/arduino-light.min.css">
@@ -18,62 +20,69 @@
     
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/jquery.min.js"></script>
-    <script src="/js/saki.js"></script>
 </head>
 
 <body>
-  <header class="header">
-  <div class="blog-title">
-    <a href="/" class="logo">n0tva1id</a>
-  </div>
-  <nav class="navbar">
-    <ul class="menu">
-      
-      
-      
-      <li class="menu-item">
-        
-        <a href="/" class="current-menu-item-link">Home</a>
-        
-      </li>
-      
-      
-      
-      <li class="menu-item">
-        
-        <a href="/archives" class="menu-item-link">Archives</a>
-        
-      </li>
-      
-      
-      
-      <li class="menu-item">
-        
-        <a href="/about" class="menu-item-link">About</a>
-        
-      </li>
-      
-      
-      
-      <li class="menu-item">
-        
-        <a href="/rss" class="menu-item-link">RSS</a>
-        
-      </li>
-      
-    </ul>
-  </nav>
-</header>
-  <main class="main">
-    <section class="posts">
-  
-  <article class="post">
-    <div class="post-title">
-      <a class="post-title-link" href="/2020/03/02/OpenWrt/">LEAN OpenWrt/LEDE的编译与安装（ESXi 6.7环境）</a>
+    <header class="header">
+    <div class="blog-title">
+        <a href="/" class="logo">n0tva1id</a>
     </div>
-    <div class="post-content">
-      
-      <h2 id="在root下编译（需64位系统，LEAN推荐使用Ubuntu）"><a href="#在root下编译（需64位系统，LEAN推荐使用Ubuntu）" class="headerlink" title="在root下编译（需64位系统，LEAN推荐使用Ubuntu）"></a>在root下编译（需64位系统，LEAN推荐使用Ubuntu）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+    <nav class="navbar">
+        <ul class="menu">
+            
+            
+            
+            <li class="menu-item">
+                
+                <a href="/" class="current-menu-item-link">Home</a>
+                
+            </li>
+            
+            
+            
+            <li class="menu-item">
+                
+                <a href="/archives" class="menu-item-link">Archives</a>
+                
+            </li>
+            
+            
+            
+            <li class="menu-item">
+                
+                <a href="/about" class="menu-item-link">About</a>
+                
+            </li>
+            
+            
+            
+            <li class="menu-item">
+                
+                <a href="/rss" class="menu-item-link">RSS</a>
+                
+            </li>
+            
+            
+            
+            <li class="menu-item">
+                
+                <a href="/member" class="menu-item-link">Member</a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</header>
+    <main class="main">
+        <section class="posts">
+    
+    <article class="post">
+        <div class="post-title">
+            <a class="post-title-link" href="/2020/03/02/OpenWrt/">LEAN OpenWrt/LEDE的编译与安装（ESXi 6.7环境）</a>
+        </div>
+        <div class="post-content">
+            
+            <h2 id="在root下编译（需64位系统，LEAN推荐使用Ubuntu）"><a href="#在root下编译（需64位系统，LEAN推荐使用Ubuntu）" class="headerlink" title="在root下编译（需64位系统，LEAN推荐使用Ubuntu）"></a>在root下编译（需64位系统，LEAN推荐使用Ubuntu）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib linux-libc-dev:i386</span><br></pre></td></tr></table></figure>
 
@@ -130,20 +139,20 @@
 <p><strong>Tips：</strong></p>
 <p>实际在系统中，直通ethx与网口x+1对应是紊乱的，需要手动尝试，暂未找到解决办法。目前怀疑是虚拟机启动之后才添加直通网卡的问题。</p>
 
-      
-    </div>
-    <div class="post-meta">
-      <span class="post-time">2020/03/02</span>
-    </div>
-  </article>
-  
-  <article class="post">
-    <div class="post-title">
-      <a class="post-title-link" href="/2020/03/01/网络折腾小记/">网络折腾小记</a>
-    </div>
-    <div class="post-content">
-      
-      <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+            
+        </div>
+        <div class="post-meta">
+            <span class="post-time">2020/03/02</span>
+        </div>
+    </article>
+    
+    <article class="post">
+        <div class="post-title">
+            <a class="post-title-link" href="/2020/03/01/网络折腾小记/">网络折腾小记</a>
+        </div>
+        <div class="post-content">
+            
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
 <li>各房间均有一个千兆网口</li>
 <li>所有房间2.4G/5G信号覆盖，且至少保证测速时能跑满运营商带宽（380M）</li>
 <li>统一在一个千兆内网下（无中继）</li>
@@ -212,20 +221,20 @@
 <li>LEDE也可以设定eth0为LAN，即与ESXi共用。但由于eth0被ESXi使用而无法直通，只能使用虚拟方式，网口吞吐量会略有下降，且cpu占用程度也会提高</li>
 </ul>
 
-      
-    </div>
-    <div class="post-meta">
-      <span class="post-time">2020/03/01</span>
-    </div>
-  </article>
-  
-  <article class="post">
-    <div class="post-title">
-      <a class="post-title-link" href="/2020/01/14/数据结构/">数据结构</a>
-    </div>
-    <div class="post-content">
-      
-      <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h1 id="排序重点考察-gt-概念重要、选填很多来自课后习题、时间复杂度要求"><a href="#排序重点考察-gt-概念重要、选填很多来自课后习题、时间复杂度要求" class="headerlink" title="排序重点考察-&gt;概念重要、选填很多来自课后习题、时间复杂度要求"></a>排序重点考察-&gt;概念重要、选填很多来自课后习题、时间复杂度要求</h1><h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><ul>
+            
+        </div>
+        <div class="post-meta">
+            <span class="post-time">2020/03/01</span>
+        </div>
+    </article>
+    
+    <article class="post">
+        <div class="post-title">
+            <a class="post-title-link" href="/2020/01/14/数据结构/">数据结构</a>
+        </div>
+        <div class="post-content">
+            
+            <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h1 id="排序重点考察-gt-概念重要、选填很多来自课后习题、时间复杂度要求"><a href="#排序重点考察-gt-概念重要、选填很多来自课后习题、时间复杂度要求" class="headerlink" title="排序重点考察-&gt;概念重要、选填很多来自课后习题、时间复杂度要求"></a>排序重点考察-&gt;概念重要、选填很多来自课后习题、时间复杂度要求</h1><h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><ul>
 <li>基本概念</li>
 <li>时间复杂度-&gt;最差复杂度、平均复杂度</li>
 </ul>
@@ -732,17 +741,17 @@
 <p>（都是由中序的性质得到的）</p>
 <p>--&gt;在B树中的删除、二叉排序树中的删除、中序线索树中都使用了这一个思想。</p>
 
-      
-    </div>
-    <div class="post-meta">
-      <span class="post-time">2020/01/14</span>
-    </div>
-  </article>
-  
+            
+        </div>
+        <div class="post-meta">
+            <span class="post-time">2020/01/14</span>
+        </div>
+    </article>
+    
 </section>
 
 <p class="license">本站文章使用 CC BY-NC-SA 4.0 许可证</p>
-  </main>
+    </main>
 </body>
 
 </html>
